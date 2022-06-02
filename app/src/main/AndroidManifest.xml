@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp1">
         <activity
-            android:name=".Register"
+            android:name=".Register.Register"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
