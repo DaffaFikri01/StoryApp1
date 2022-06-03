@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/drawable/custom_button.xml" value="0.136" />
+        <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/drawable/custom_button_login.xml" value="0.136" />
+        <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/drawable/custom_button_register.xml" value="0.136" />
+        <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/layout/activity_all_user_story.xml" value="0.25" />
+        <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/A'a Kuliah Dappo/1_Program Bangkit By Google (2022)/Android Learning Path - 2022/Kumpulan Android Studio/StoryApp1/app/src/main/res/layout/activity_register.xml" value="0.22" />
       </map>
     </option>

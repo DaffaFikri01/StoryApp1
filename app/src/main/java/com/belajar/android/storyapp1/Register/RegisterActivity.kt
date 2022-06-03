@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.belajar.android.storyapp1.R
 import com.belajar.android.storyapp1.databinding.ActivityRegisterBinding
 
-class Register : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
 
@@ -14,6 +14,6 @@ class Register : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setTitle(R.string.register)
+        supportActionBar?.title = "Register"
     }
 }
