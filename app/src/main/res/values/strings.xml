@@ -6,4 +6,7 @@
     <string name="invalid_email">Your email format is wrong</string>
     <string name="password">Password</string>
     <string name="password_error_msg">Password minimum 6 characters</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="dont_have_account">Don\'t Have Account? Click Register Here!</string>
 </resources>

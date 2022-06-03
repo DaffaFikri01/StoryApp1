@@ -1,16 +1,14 @@
-package com.belajar.android.storyapp1.EditText
+package com.belajar.android.storyapp1.CustomView
 
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Patterns.EMAIL_ADDRESS
+import android.util.Patterns
 import androidx.appcompat.widget.AppCompatEditText
 import com.belajar.android.storyapp1.R
 
-class MyEditText : AppCompatEditText {
-
-    var editText = ""
+class EmailEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context){
         init()
@@ -31,18 +29,12 @@ class MyEditText : AppCompatEditText {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (editText == "password"){
-                    if (s.length < 6){
-                        error = resources.getString(R.string.password_error_msg)
-                    }
-                }else if (editText == "email"){
-                    if (!EMAIL_ADDRESS.matcher(s).matches()){
-                        error = resources.getString(R.string.invalid_email)
-                    }
+                if (!Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()){
+                    error = resources.getString(R.string.invalid_email)
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable) {
                 //Do Nothing
             }
 
