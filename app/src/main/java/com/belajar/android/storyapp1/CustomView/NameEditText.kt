@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.belajar.android.storyapp1.R
 
-class PasswordEditText : AppCompatEditText {
+class NameEditText : AppCompatEditText {
     constructor(context: Context) : super(context){
         init()
     }
@@ -21,13 +21,13 @@ class PasswordEditText : AppCompatEditText {
     }
 
     private fun init(){
-        addTextChangedListener(object : TextWatcher{
+        addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.length < 6){
-                    error = resources.getString(R.string.password_error_msg)
+                if (s.isEmpty()){
+                    error = resources.getString(R.string.name_error_msg)
                 }
             }
 

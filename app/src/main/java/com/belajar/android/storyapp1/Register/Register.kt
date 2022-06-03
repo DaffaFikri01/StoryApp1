@@ -13,5 +13,7 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setTitle(R.string.register)
     }
 }
