@@ -1,5 +1,6 @@
 package com.belajar.android.storyapp1.Story
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.belajar.android.storyapp1.R
@@ -15,5 +16,10 @@ class AllUserStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Story User"
+
+        binding.fabAddStory.setOnClickListener {
+            val intent = Intent(this, AddStoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
