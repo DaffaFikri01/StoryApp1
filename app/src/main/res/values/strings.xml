@@ -8,6 +8,7 @@
     <string name="gallery">Gallery</string>
     <string name="description">Add Description</string>
     <string name="desc_error_msg">Description must be filled!</string>
+    <string name="choosePicture">Choose a Picture</string>
     <string name="upload">Upload</string>
     <string name="name">Name</string>
     <string name="name_error_msg">Name Can\'t be Empty!</string>

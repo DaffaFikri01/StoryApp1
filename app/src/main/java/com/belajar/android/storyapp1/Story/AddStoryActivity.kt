@@ -47,13 +47,11 @@ class AddStoryActivity : AppCompatActivity() {
         val intent = Intent()
         intent.action = ACTION_GET_CONTENT
         intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        val chooser = Intent.createChooser(intent, resources.getString(R.string.choosePicture))
         launcherIntentGallery.launch(chooser)
     }
 
-    private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
+    private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
             val selectedImg: Uri = it.data?.data as Uri
             val myPicture = uriToFile(selectedImg, this@AddStoryActivity)
