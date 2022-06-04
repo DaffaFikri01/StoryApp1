@@ -13,7 +13,8 @@
         android:theme="@style/Theme.StoryApp1">
         <activity
             android:name=".Story.AddStoryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Story.AllUserStoryActivity" />
         <activity
             android:name=".Story.AllUserStoryActivity"
             android:exported="false" />

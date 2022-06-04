@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import com.belajar.android.storyapp1.R
 import com.belajar.android.storyapp1.Utils.uriToFile
 import com.belajar.android.storyapp1.databinding.ActivityAddStoryBinding
 import java.io.File
@@ -22,6 +23,7 @@ class AddStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Add Story"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.apply {
             btnGallery.setOnClickListener {
@@ -61,6 +63,15 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun uploadPicture() {
+        val desc = binding.etDescriptionStory.text.toString()
+
+        when {
+            desc.isEmpty() -> {
+                binding.etDescriptionStory.error = resources.getString(R.string.desc_error_msg)
+            }
+            else ->{
+            }
+        }
     }
 
     private fun showLoading(isLoading: Boolean){
