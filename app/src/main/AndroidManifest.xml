@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp1">
         <activity
+            android:name=".Story.AddStoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Story.AllUserStoryActivity"
             android:exported="false" />
         <activity

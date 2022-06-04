@@ -2,6 +2,8 @@
     <string name="app_name">StoryApp1</string>
     <string name="storyApp1">Story App 1</string>
     <string name="android_intermediate">Android Intermediate</string>
+    <string name="add">Add</string>
+    <string name="imgAddStory">Image Add</string>
     <string name="name">Name</string>
     <string name="name_error_msg">Name Can\'t be Empty!</string>
     <string name="email">Email</string>
