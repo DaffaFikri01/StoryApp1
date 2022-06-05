@@ -13,8 +13,10 @@
     <string name="name">Name</string>
     <string name="name_error_msg">Name Can\'t be Empty!</string>
     <string name="email">Email</string>
+    <string name="email_warn_msg">Email must be filled!</string>
     <string name="invalid_email">Your email format is wrong</string>
     <string name="password">Password</string>
+    <string name="password_warn_msg">Password must be filled!</string>
     <string name="password_error_msg">Password minimum 6 characters</string>
     <string name="login">Login</string>
     <string name="register">Register</string>

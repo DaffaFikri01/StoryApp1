@@ -15,5 +15,34 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Register"
+
+        binding.apply {
+            btnRegister2.setOnClickListener {
+                registerClick()
+            }
+        }
+    }
+
+    private fun registerClick() {
+        val regisName = binding.etRegisName.text.toString()
+        val regisEmail = binding.etRegisEmail.text.toString()
+        val regisPassword = binding.etRegisPassword.text.toString()
+
+        when {
+            regisName.isEmpty() -> {
+                binding.etRegisName.error = resources.getString(R.string.name_error_msg)
+            }
+
+            regisEmail.isEmpty() -> {
+                binding.etRegisEmail.error = resources.getString(R.string.email_warn_msg)
+            }
+
+            regisPassword.isEmpty() -> {
+                binding.etRegisPassword.error = resources.getString(R.string.password_warn_msg)
+            }
+            else -> {
+
+            }
+        }
     }
 }

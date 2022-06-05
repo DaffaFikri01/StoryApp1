@@ -67,7 +67,7 @@ class AddStoryActivity : AppCompatActivity() {
             desc.isEmpty() -> {
                 binding.etDescriptionStory.error = resources.getString(R.string.desc_error_msg)
             }
-            else ->{
+            else -> {
             }
         }
     }
