@@ -2,17 +2,32 @@ package com.belajar.android.storyapp1
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import com.belajar.android.storyapp1.Api.ApiConfig
+import com.belajar.android.storyapp1.Login.LoginResponse
+import com.belajar.android.storyapp1.Model.UserModelData
+import com.belajar.android.storyapp1.Preference.UserPreferences
 import com.belajar.android.storyapp1.Register.RegisterActivity
 import com.belajar.android.storyapp1.Story.AllUserStoryActivity
 import com.belajar.android.storyapp1.databinding.ActivityMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    private lateinit var mainVM : MainVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,33 +35,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setAnimation()
+        setupLogVM()
+        toRegisterActivity()
 
         binding.apply {
-            btnRegister1.setOnClickListener{
-                toRegisterActivity()
-            }
-
             btnLogin.setOnClickListener {
-                toAllUserStoryActivity()
+                setupAction()
             }
         }
     }
 
-
-    private fun toRegisterActivity() {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun toAllUserStoryActivity() {
-        if (binding.etLoginEmail.length() == 0 && binding.etLoginPassword.length() == 0){
-            binding.etLoginEmail.error = resources.getString(R.string.email_warn_msg)
-            binding.etLoginPassword.error = resources.getString(R.string.password_warn_msg)
-        }else if (binding.etLoginEmail.length() != 0 && binding.etLoginPassword.length() >= 6){
-            val intent = Intent(this, AllUserStoryActivity::class.java)
-            startActivity(intent)
-        }
-    }
 
     private fun setAnimation() {
         val title = ObjectAnimator.ofFloat(binding.storyApp, View.ALPHA, 1f).setDuration(500)
@@ -59,4 +57,72 @@ class MainActivity : AppCompatActivity() {
             start()
         }
     }
+
+    private fun toRegisterActivity() {
+        binding.btnRegister1.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+    }
+
+    private fun setupLogVM() {
+        mainVM = ViewModelProvider(this,
+            VMFactory(UserPreferences.getInstance(dataStore)))[MainVM::class.java]
+
+        mainVM.loginUsers().observe(this) { users ->
+            if (users.isLogin){
+                startActivity(Intent(this, AllUserStoryActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+    private fun setupAction() {
+        val logEmail = binding.etLoginEmail.text.toString()
+        val logPass = binding.etLoginPassword.text.toString()
+
+        if (binding.etLoginEmail.length() == 0 && binding.etLoginPassword.length() == 0){
+            binding.etLoginEmail.error = resources.getString(R.string.email_warn_msg)
+            binding.etLoginPassword.error = resources.getString(R.string.password_warn_msg)
+        }
+        else if (binding.etLoginEmail.length() != 0 && binding.etLoginPassword.length() >= 6) {
+            showLoading(true)
+
+            ApiConfig.getApiService().login(logEmail, logPass)
+                .enqueue(object : Callback<LoginResponse> {
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        showLoading(false)
+                        if (response.isSuccessful) {
+                            response.body()?.loginResult?.apply {
+                                saveSession(token)
+                            }
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Login Successful",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(this@MainActivity, "Login Failed", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        Toast.makeText(this@MainActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+        }
+    }
+
+    private fun saveSession(token : String?){
+        mainVM.sessionSave(UserModelData(token.toString(), true))
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
 }

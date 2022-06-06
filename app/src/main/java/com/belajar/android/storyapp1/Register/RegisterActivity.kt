@@ -1,13 +1,24 @@
 package com.belajar.android.storyapp1.Register
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import com.belajar.android.storyapp1.Api.ApiConfig
+import com.belajar.android.storyapp1.MainActivity
 import com.belajar.android.storyapp1.R
 import com.belajar.android.storyapp1.databinding.ActivityRegisterBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
+    private lateinit var regisVM : RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +27,25 @@ class RegisterActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Register"
 
+        setAnimation()
+
         binding.apply {
             btnRegister2.setOnClickListener {
                 registerClick()
             }
+        }
+    }
+
+    private fun setAnimation() {
+        val regisTitle = ObjectAnimator.ofFloat(binding.regisTitle, View.ALPHA, 1f).setDuration(500)
+        val btnRegisName = ObjectAnimator.ofFloat(binding.tilName, View.ALPHA, 1f).setDuration(500)
+        val btnRegisEmail = ObjectAnimator.ofFloat(binding.tilEmail, View.ALPHA, 1f).setDuration(500)
+        val btnRegisPassword = ObjectAnimator.ofFloat(binding.tilPassword, View.ALPHA, 1f).setDuration(500)
+        val btnRegis2 = ObjectAnimator.ofFloat(binding.btnRegister2, View.ALPHA, 1f).setDuration(500)
+
+        AnimatorSet().apply {
+            playSequentially(regisTitle, btnRegisName, btnRegisEmail, btnRegisPassword, btnRegis2)
+            start()
         }
     }
 
@@ -28,21 +54,40 @@ class RegisterActivity : AppCompatActivity() {
         val regisEmail = binding.etRegisEmail.text.toString()
         val regisPassword = binding.etRegisPassword.text.toString()
 
-        when {
-            regisName.isEmpty() -> {
-                binding.etRegisName.error = resources.getString(R.string.name_error_msg)
-            }
+        if (binding.etRegisName.length() == 0 && binding.etRegisEmail.length() == 0 && binding.etRegisPassword.length() == 0){
+            binding.etRegisName.error = resources.getString(R.string.name_warn_msg)
+            binding.etRegisEmail.error = resources.getString(R.string.email_warn_msg)
+            binding.etRegisPassword.error = resources.getString(R.string.password_warn_msg)
 
-            regisEmail.isEmpty() -> {
-                binding.etRegisEmail.error = resources.getString(R.string.email_warn_msg)
-            }
+        }else if (binding.etRegisName.length() != 0 && binding.etRegisEmail.length() != 0 && binding.etRegisPassword.length() >= 6){
+            showLoading(true)
 
-            regisPassword.isEmpty() -> {
-                binding.etRegisPassword.error = resources.getString(R.string.password_warn_msg)
-            }
-            else -> {
+            ApiConfig.getApiService().register(regisName, regisEmail, regisPassword)
+                .enqueue(object : Callback<RegisterResponse>{
+                    override fun onResponse(
+                        call: Call<RegisterResponse>,
+                        response: Response<RegisterResponse>
+                    ) {
+                        showLoading(false)
 
-            }
+                        if (response.isSuccessful){
+                            Toast.makeText(this@RegisterActivity, "Register Successful", Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            Toast.makeText(this@RegisterActivity, "Register Failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                        Toast.makeText(this@RegisterActivity, "Register Failed", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+            startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

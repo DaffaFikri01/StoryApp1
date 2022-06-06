@@ -27,7 +27,7 @@ class NameEditText : AppCompatEditText {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isEmpty()){
-                    error = resources.getString(R.string.name_error_msg)
+                    error = resources.getString(R.string.name_warn_msg)
                 }
             }
 
