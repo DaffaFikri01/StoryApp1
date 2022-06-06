@@ -7,13 +7,12 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.content.ContextCompat.startActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.belajar.android.storyapp1.MainActivity
-import com.belajar.android.storyapp1.MainVM
+import com.belajar.android.storyapp1.LogoutVM.LogoutVM
 import com.belajar.android.storyapp1.Preference.UserPreferences
 import com.belajar.android.storyapp1.R
 import com.belajar.android.storyapp1.VMFactory
@@ -23,7 +22,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class AllUserStoryActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAllUserStoryBinding
-    private lateinit var mainVM: MainVM
+    private lateinit var logoutVM: LogoutVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +40,8 @@ class AllUserStoryActivity : AppCompatActivity() {
     }
 
     private fun setupRegisVM() {
-        mainVM = ViewModelProvider(this,
-            VMFactory(UserPreferences.getInstance(dataStore)))[MainVM::class.java]
+        logoutVM = ViewModelProvider(this,
+            VMFactory(UserPreferences.getInstance(dataStore)))[LogoutVM::class.java]
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,8 +53,9 @@ class AllUserStoryActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.logout -> {
-                mainVM.logout()
+                logoutVM.userLogout()
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
                 true
             }
 

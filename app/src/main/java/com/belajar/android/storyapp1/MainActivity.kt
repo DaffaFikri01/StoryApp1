@@ -14,6 +14,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.belajar.android.storyapp1.Api.ApiConfig
 import com.belajar.android.storyapp1.Login.LoginResponse
+import com.belajar.android.storyapp1.Login.LoginVM
 import com.belajar.android.storyapp1.Model.UserModelData
 import com.belajar.android.storyapp1.Preference.UserPreferences
 import com.belajar.android.storyapp1.Register.RegisterActivity
@@ -27,7 +28,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private lateinit var mainVM : MainVM
+    private lateinit var mainVM : LoginVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupLogVM() {
         mainVM = ViewModelProvider(this,
-            VMFactory(UserPreferences.getInstance(dataStore)))[MainVM::class.java]
+            VMFactory(UserPreferences.getInstance(dataStore)))[LoginVM::class.java]
 
         mainVM.loginUsers().observe(this) { users ->
             if (users.isLogin){
