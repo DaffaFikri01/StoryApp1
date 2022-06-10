@@ -28,7 +28,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private lateinit var mainVM : LoginVM
+    private lateinit var loginVM : LoginVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +66,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupLogVM() {
-        mainVM = ViewModelProvider(this,
+        loginVM = ViewModelProvider(this,
             VMFactory(UserPreferences.getInstance(dataStore)))[LoginVM::class.java]
 
-        mainVM.loginUsers().observe(this) { users ->
+        loginVM.loginUsers().observe(this) { users ->
             if (users.isLogin){
                 startActivity(Intent(this, AllUserStoryActivity::class.java))
                 finish()
@@ -101,17 +101,17 @@ class MainActivity : AppCompatActivity() {
                             }
                             Toast.makeText(
                                 this@MainActivity,
-                                "Login Successful",
+                                resources.getString(R.string.loginSuccessful),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
-                            Toast.makeText(this@MainActivity, "Login Failed", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@MainActivity, resources.getString(R.string.loginFail), Toast.LENGTH_SHORT)
                                 .show()
                         }
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Toast.makeText(this@MainActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, resources.getString(R.string.loginFail), Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveSession(token : String?){
-        mainVM.sessionSave(UserModelData(token.toString(), true))
+        loginVM.sessionSave(UserModelData(token.toString(), true))
     }
 
     private fun showLoading(isLoading: Boolean){
