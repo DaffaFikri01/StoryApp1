@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">StoryApp1</string>
     <string name="storyApp1">Story App 1</string>
+    <string name="storyUser">Story User</string>
     <string name="android_intermediate">Android Intermediate</string>
     <string name="add">Add</string>
-    <string name="imgAddStory">Image Add</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="description">Add Description</string>
@@ -21,8 +21,15 @@
     <string name="logout">Logout</string>
     <string name="setting">Setting</string>
     <string name="login">Login</string>
+    <string name="loginSuccessful">Login Successful</string>
     <string name="loginFail">Login Failed</string>
     <string name="register">Register</string>
+    <string name="registerSuccessful">Register Successful</string>
+    <string name="registerFail">Register Failed</string>
+    <string name="uploadSuccessful">Upload Successful</string>
+    <string name="uploadFail">Upload Failed</string>
+    <string name="loadSuccessful">Load Successful</string>
+    <string name="loadFail">Load Failed</string>
     <string name="dont_have_account">Don\'t Have Account? Click Register Here!</string>
     <string name="imgDetailStory">Image Detail Story</string>
     <string name="username">Username</string>

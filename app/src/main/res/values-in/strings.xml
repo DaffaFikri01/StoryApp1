@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AplikasiStory1</string>
+    <string name="storyApp1">Aplikasi Story 1</string>
+    <string name="storyUser">Story Pengguna</string>
+    <string name="android_intermediate">Android Intermediate</string>
+    <string name="add">Tambah</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="description">Tambahkan Deskripsi</string>
+    <string name="desc_error_msg">Deskripsi wajib di isi!</string>
+    <string name="choosePicture">Pilih Gambar</string>
+    <string name="upload">Unggah</string>
+    <string name="name">Nama</string>
+    <string name="name_warn_msg">Nama tidak boleh kosong!</string>
+    <string name="email">Email</string>
+    <string name="email_warn_msg">Email wajib di isi!</string>
+    <string name="invalid_email">Format email anda salah</string>
+    <string name="password">Password</string>
+    <string name="password_warn_msg">Password wajib di isi!</string>
+    <string name="password_error_msg">Password minimal 6 karakter</string>
+    <string name="logout">Keluar</string>
+    <string name="setting">Pengaturan</string>
+    <string name="login">Masuk</string>
+    <string name="loginSuccessful">Login Berhasil</string>
+    <string name="loginFail">Login Gagal</string>
+    <string name="register">Registrasi</string>
+    <string name="registerSuccessful">Registrasi Berhasil</string>
+    <string name="registerFail">Registrasi Gagal</string>
+    <string name="uploadSuccessful">Berhasil Mengunggah</string>
+    <string name="uploadFail">Gagal Mengunggah</string>
+    <string name="loadSuccessful">Berhasil Memuat</string>
+    <string name="loadFail">Gagal Memuat</string>
+    <string name="dont_have_account">Tidak punya akun? Klik registrasi dibawah!</string>
+    <string name="imgDetailStory">Detail Gambar Story</string>
+    <string name="username">Username</string>
+    <string name="userDesc">Deskripsi Pengguna</string>
+    <string name="usernameDetail">Detail Pengguna</string>
+    <string name="userDescDetail">Detail Deskripsi Pengguna</string>
+</resources>

@@ -9,9 +9,10 @@
 
     <ImageView
         android:id="@+id/imgDetail"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_marginTop="50dp"
+        android:transitionName="imgDetailTr"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +21,7 @@
 
     <TextView
         android:id="@+id/userNameDetail"
+        android:transitionName="userNameTr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
@@ -34,6 +36,7 @@
 
     <TextView
         android:id="@+id/userDescDetail"
+        android:transitionName="userDescTr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"

@@ -18,7 +18,6 @@ import retrofit2.Response
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
-    private lateinit var regisVM : RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,26 +63,29 @@ class RegisterActivity : AppCompatActivity() {
 
             ApiConfig.getApiService().register(regisName, regisEmail, regisPassword)
                 .enqueue(object : Callback<RegisterResponse>{
-                    override fun onResponse(
-                        call: Call<RegisterResponse>,
+                    override fun onResponse(call: Call<RegisterResponse>,
                         response: Response<RegisterResponse>
                     ) {
                         showLoading(false)
 
                         if (response.isSuccessful){
-                            Toast.makeText(this@RegisterActivity, "Register Successful", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                            finish()
+                            Toast.makeText(this@RegisterActivity,
+                                resources.getString(R.string.registerSuccessful), Toast.LENGTH_SHORT).show()
+                            showLoading(true)
                         }
                         else {
-                            Toast.makeText(this@RegisterActivity, "Register Failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity,
+                                resources.getString(R.string.registerFail), Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                        Toast.makeText(this@RegisterActivity, "Register Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterActivity, resources.getString(R.string.registerFail), Toast.LENGTH_SHORT).show()
                     }
 
                 })
-            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
